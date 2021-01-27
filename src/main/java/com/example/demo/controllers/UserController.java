@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import com.example.demo.model.User;
+import com.example.demo.services.GeneralService;
 import com.example.demo.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
     private UserService userService;
-
+   // private GeneralService<User> generalService;
     //private ProductToProductForm productToProductForm;
 
 //    @Autowired
@@ -29,7 +31,12 @@ public class UserController {
     @Autowired
     public void setProductService(UserService userService) {
         this.userService = userService;
+
     }
+//    @Autowired
+//    public void setProductService(GeneralService<User> generalService) {
+//        this.generalService = generalService;
+//    }
 
     @RequestMapping("/")
     public String redirToList(){
