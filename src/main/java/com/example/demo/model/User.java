@@ -7,21 +7,21 @@ import javax.persistence.Id;
 
 
 @Entity
-public class User {
+public class User extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private Long Id;
+//    @Id
+//    @GeneratedValue
+//    private Long Id;
     private String Name;
     private double Balance;
 
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
+//    public Long getId() {
+//        return Id;
+//    }
+//
+//    public void setId(Long id) {
+//        Id = id;
+//    }
 
     public String getName() {
         return Name;
