@@ -13,6 +13,8 @@ public class User extends AbstractEntity{
 //    @GeneratedValue
 //    private Long Id;
     private String Name;
+    private String Password;
+    private String Login;
     private double Balance;
 
 //    public Long getId() {
@@ -22,6 +24,22 @@ public class User extends AbstractEntity{
 //    public void setId(Long id) {
 //        Id = id;
 //    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getLogin() {
+        return Login;
+    }
+
+    public void setLogin(String login) {
+        Login = login;
+    }
 
     public String getName() {
         return Name;
