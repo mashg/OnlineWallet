@@ -18,17 +18,24 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+//import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+
 @SpringBootTest
 class DemoApplicationTests {
+
 
     private final String redirectUrl = "http://localhost:8080/";
     private final String authorizeUrlPattern = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/auth?response_type=code&client_id=barClient&scope=%s&redirect_uri=" + redirectUrl;
     private final String tokenUrl = "http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/token";
     private final String resourceUrl = "http://localhost:8082/resource-server-opaque/bars";
     
+
     @Test
     void contextLoads() {
     }
+
 
     @Test
     public void givenUserWithReadScope_whenGetFooResource_thenSuccess() {
@@ -77,5 +84,6 @@ class DemoApplicationTests {
         return response.jsonPath()
             .getString("access_token");
     }
+
 
 }
