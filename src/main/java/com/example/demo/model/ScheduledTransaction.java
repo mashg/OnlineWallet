@@ -1,7 +1,10 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.text.DateFormat;
+import java.util.Collection;
 
 @Entity
 public class ScheduledTransaction extends AbstractEntity{
@@ -9,7 +12,8 @@ public class ScheduledTransaction extends AbstractEntity{
     private DateFormat NextSend;
     private String Schedule;
     private short Status;
-
+    @OneToMany(mappedBy="transactions", fetch= FetchType.EAGER)
+    private Collection<Transactions> Transactions;
     public double getAmount() {
         return Amount;
     }

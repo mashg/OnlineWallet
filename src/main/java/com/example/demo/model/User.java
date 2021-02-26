@@ -2,8 +2,9 @@ package com.example.demo.model;
 
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.Collection;
 
 
 @Entity
@@ -17,6 +18,11 @@ public class User extends AbstractEntity{
     private String Login;
     private double Balance;
 
+
+    @OneToMany (mappedBy="transactions", fetch=FetchType.EAGER)
+    private Collection<com.example.demo.model.Transactions> Transactions;
+//    @OneToMany(mappedBy="transaction", fetch= FetchType.EAGER)
+//    private Collection<Transaction> Transactions;
 //    public Long getId() {
 //        return Id;
 //    }

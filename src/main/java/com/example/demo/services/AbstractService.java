@@ -59,7 +59,6 @@ public abstract class AbstractService<E extends AbstractEntity, R extends Common
 
     @Override
     public Boolean deleteAll() {
-
         repository.deleteAll();
         List<E> list = new ArrayList<>();
         repository.findAll().forEach(list::add); //fun with Java 8
