@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for macos10.14 (x86_64)
 --
--- Host: 127.0.0.1    Database: wallet
+-- Host: localhost    Database: Wallet
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,12 +21,14 @@
 
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `category` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Is_outcome` tinyint DEFAULT NULL,
+  `Icon` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +37,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Products',NULL,NULL),(2,'Entertainment',NULL,NULL),(3,'Transport',NULL,NULL),(4,'Clothes',NULL,NULL),(5,'B&H',NULL,NULL),(6,'Medicine',NULL,NULL),(7,'Education',NULL,NULL),(8,'Utilities',NULL,NULL),(9,'Gifts',NULL,NULL),(10,'Restaurants',NULL,NULL),(11,'Traveling',NULL,NULL),(12,'Devices',NULL,NULL),(13,'Other',NULL,NULL),(14,'Salary',NULL,NULL),(15,'Bonus',NULL,NULL),(16,'PocketMoney',NULL,NULL),(17,'Scholarship',NULL,NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -44,14 +47,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `scheduled_transaction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `scheduled_transaction` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `NextSend` datetime NOT NULL,
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `DateEnd` datetime NOT NULL,
   `Status` tinyint NOT NULL,
-  `Amount` decimal(18,2) NOT NULL,
-  `Schedule` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,23 +71,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transaction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `transaction` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `CategoryId` int NOT NULL,
-  `UserId` int NOT NULL,
-  `SchTransactionId` int DEFAULT NULL,
+  `CategoryID` int NOT NULL,
+  `UserID` int NOT NULL,
+  `SchTransactionID` int NOT NULL,
   `Date` datetime NOT NULL,
-  `Amount` decimal(18,2) NOT NULL,
-  `IsIncome` bit(1) NOT NULL,
+  `SumOfMoney` decimal(18,2) NOT NULL,
+  `Type` tinyint DEFAULT NULL,
   `Comment` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Id`),
-  KEY `UserID_idx` (`UserId`),
-  KEY `CategoryID_idx` (`CategoryId`),
-  KEY `SchTransactionID_idx` (`SchTransactionId`),
-  CONSTRAINT `CategoryID` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`Id`) ON UPDATE CASCADE,
-  CONSTRAINT `SchTransactionID` FOREIGN KEY (`SchTransactionId`) REFERENCES `scheduled_transaction` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `UserID` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `UserID_idx` (`UserID`),
+  KEY `CategoryID_idx` (`CategoryID`),
+  KEY `SchTransactionID_idx` (`SchTransactionID`),
+  CONSTRAINT `CategoryID` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`ID`) ON UPDATE CASCADE,
+  CONSTRAINT `SchTransactionID` FOREIGN KEY (`SchTransactionID`) REFERENCES `scheduled_transaction` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -105,14 +106,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Balance` decimal(18,2) NOT NULL,
   `Login` varchar(45) NOT NULL,
   `Password` varchar(20) NOT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -135,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-02 21:16:29
+-- Dump completed on 2021-02-26 11:22:21
