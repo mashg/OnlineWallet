@@ -57,6 +57,7 @@ import java.util.List;
 
 
 //@RestController
+
 @Controller
 @RequestMapping("/user")
 public class UserController extends AbstractController<User, UserService> {
